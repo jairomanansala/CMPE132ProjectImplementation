@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Unauthorized Access</h1>
+
+<p class="error">
+    You do not have permission to access this page or perform this action.
+</p>
+
+<p>
+    This page is shown when the RBAC authorization check denies the request.
+</p>
+
+<a href="{{ url_for('dashboard') }}">Return to Dashboard</a>
+{% endblock %}

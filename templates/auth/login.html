@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - SJSUL</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>SJSUL Library Login</h1>
+        <p>Enter your username and password to access the library system.</p>
+
+        <!-- Flash messages display login errors or logout messages. -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="form-row">
+                <label>Username:</label><br>
+                <input type="text" name="username" required>
+            </div>
+
+            <div class="form-row">
+                <label>Password:</label><br>
+                <input type="password" name="password" required>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="card">
+            <h3>Test Accounts</h3>
+            <p><strong>Admin:</strong> admin1 / Password123</p>
+            <p><strong>Member:</strong> member1 / Password123</p>
+            <p><strong>Member 2:</strong> member2 / Password123</p>
+            <p><strong>Librarian:</strong> librarian1 / Library123</p>
+        </div>
+    </div>
+</body>
+</html>

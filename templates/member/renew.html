@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Renew Book</h1>
+<p>Members can renew borrowed books if the renewal limit has not been reached and no hold exists.</p>
+
+<table>
+    <tr>
+        <th>Borrowing ID</th>
+        <th>Book Title</th>
+        <th>Due Date</th>
+        <th>Renewal Count</th>
+        <th>Hold Requested</th>
+        <th>Action</th>
+    </tr>
+
+    {% for record in records %}
+    <tr>
+        <td>{{ record["borrowing_id"] }}</td>
+        <td>{{ record["title"] }}</td>
+        <td>{{ record["due_date"] }}</td>
+        <td>{{ record["renewal_count"] }}</td>
+        <td>{{ "Yes" if record["hold_requested"] else "No" }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('renew_book', borrowing_id=record['borrowing_id']) }}">
+                <button type="submit">Renew</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if records|length == 0 %}
+<p>You do not currently have any active borrowed books.</p>
+{% endif %}
+{% endblock %}

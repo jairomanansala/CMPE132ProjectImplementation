@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Study Rooms</h1>
+<p>Members can reserve one study room at a time.</p>
+
+<table>
+    <tr>
+        <th>Room ID</th>
+        <th>Room Name</th>
+        <th>Capacity</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for room in rooms %}
+    <tr>
+        <td>{{ room["room_id"] }}</td>
+        <td>{{ room["room_name"] }}</td>
+        <td>{{ room["capacity"] }}</td>
+        <td>{{ room["room_status"] }}</td>
+        <td>
+            {% if room["room_status"] == "available" %}
+                <form method="POST" action="{{ url_for('reserve_room', room_id=room['room_id']) }}">
+                    <label>Date:</label><br>
+                    <input type="date" name="reservation_date" required><br>
+
+                    <label>Start:</label><br>
+                    <input type="time" name="start_time" required><br>
+
+                    <label>End:</label><br>
+                    <input type="time" name="end_time" required><br>
+
+                    <button type="submit">Reserve</button>
+                </form>
+            {% else %}
+                Not Available
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

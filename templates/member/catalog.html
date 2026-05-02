@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Book Catalog</h1>
+<p>Members can view available books and borrow books if the RBAC and object checks pass.</p>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Status</th>
+        <th>Hold Requested</th>
+        <th>Action</th>
+    </tr>
+
+    {% for book in books %}
+    <tr>
+        <td>{{ book["book_id"] }}</td>
+        <td>{{ book["title"] }}</td>
+        <td>{{ book["author"] }}</td>
+        <td>{{ book["status"] }}</td>
+        <td>{{ "Yes" if book["hold_requested"] else "No" }}</td>
+        <td>
+            {% if book["status"] == "available" %}
+                <form method="POST" action="{{ url_for('borrow_book', book_id=book['book_id']) }}">
+                    <button type="submit">Borrow</button>
+                </form>
+            {% else %}
+                Not Available
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

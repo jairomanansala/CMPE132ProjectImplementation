@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Provision New User</h1>
+
+<p>
+    This form creates a new user account and stores a hashed version of the password.
+</p>
+
+<form method="POST">
+    <div class="form-row">
+        <label>Username:</label><br>
+        <input type="text" name="username" required>
+    </div>
+
+    <div class="form-row">
+        <label>Password:</label><br>
+        <input type="password" name="password" required>
+    </div>
+
+    <div class="form-row">
+        <label>Full Name:</label><br>
+        <input type="text" name="full_name" required>
+    </div>
+
+    <div class="form-row">
+        <label>Email:</label><br>
+        <input type="email" name="email" required>
+    </div>
+
+    <div class="form-row">
+        <label>Role:</label><br>
+        <select name="role_id" required>
+            {% for role in roles %}
+                <option value="{{ role['role_id'] }}">{{ role["role_name"] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit">Create User</button>
+</form>
+
+<p>
+    <a href="{{ url_for('users') }}">Back to Manage Users</a>
+</p>
+{% endblock %}

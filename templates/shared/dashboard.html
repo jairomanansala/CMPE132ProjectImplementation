@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="card">
+    <p><strong>Logged in as:</strong> {{ user["username"] }}</p>
+    <p><strong>Full Name:</strong> {{ user["full_name"] }}</p>
+    <p><strong>Role:</strong> {{ user["role_name"] }}</p>
+    <p><strong>Account Status:</strong> {{ user["account_status"] }}</p>
+</div>
+
+<h2>Active Session Permissions</h2>
+<p>These permissions are loaded from the user's assigned RBAC role.</p>
+
+<ul>
+    {% for permission in permissions %}
+        <li>{{ permission }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
